@@ -7,17 +7,17 @@ using System;
 public readonly partial struct RandomShader : IComputeShader
 {
   
-    private readonly ReadWriteBuffer<double> C;
+    private readonly ReadWriteBuffer<float> C;
     private readonly int width;
 
-    private double Random(int seed)
+    private float Random(int seed)
     {
         uint x = (uint)seed;
         x = (x ^ 0xDEADBEEF) + (x << 4);
         x = x ^ (x >> 16);
-        return (x & 0xFFFFFF) / (double)0x1000000 * 10.0;
+        return (x & 0xFFFFFF) / (float)0x1000000 * 10.0f;
     }
-    public RandomShader(ReadWriteBuffer<double> C, int width)
+    public RandomShader(ReadWriteBuffer<float> C, int width)
     {
         
         this.C = C;
