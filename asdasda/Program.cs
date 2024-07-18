@@ -20,3 +20,21 @@ var mathNetWatch = Stopwatch.StartNew();
 var mathNetArray = DenseMatrix.Create(1000, 1000, 2.0f);
 mathNetWatch.Stop();
 Console.WriteLine($"Math.NET Numerics execution time: {mathNetWatch.ElapsedMilliseconds} ms");
+
+// Time Parallel.For array fill
+var parallelFillWatch = Stopwatch.StartNew();
+float[] parallelFillArray = ParallelFillArray(size * size, 2.0f);
+parallelFillWatch.Stop();
+Console.WriteLine($"Parallel.For fill execution time: {parallelFillWatch.ElapsedMilliseconds} ms");
+
+static float[] ParallelFillArray(int length, float fillValue)
+{
+    float[] array = new float[length];
+
+    Parallel.For(0, length, i =>
+    {
+        array[i] = fillValue;
+    });
+
+    return array;
+}
