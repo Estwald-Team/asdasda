@@ -1,4 +1,5 @@
 ﻿using asdasda;
+using MathNet.Numerics.LinearAlgebra.Single;
 using System.Diagnostics;
 
 int size = 1000;
@@ -14,3 +15,8 @@ var gpuWatch = Stopwatch.StartNew();
 float[] gpuArray = MatrixGenerationGPU.GenerateMatrixGPU(size);
 gpuWatch.Stop();
 Console.WriteLine($"GPU ComputeSharp execution time: {gpuWatch.ElapsedMilliseconds} ms");
+
+var mathNetWatch = Stopwatch.StartNew();
+var mathNetArray = DenseMatrix.Create(1000, 1000, 2.0f);
+mathNetWatch.Stop();
+Console.WriteLine($"Math.NET Numerics execution time: {mathNetWatch.ElapsedMilliseconds} ms");
