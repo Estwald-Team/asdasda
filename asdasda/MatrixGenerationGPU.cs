@@ -3,13 +3,13 @@ using ComputeSharp;
 
 class MatrixGenerationGPU
 {
-    public static float[] GenerateMatrixGPU(int size)
+    public static float[] GenerateMatrixGPU(int size, float fillValue)
     {
         float[] matrix = new float[size];
 
         using (ReadWriteBuffer<float> buffer = GraphicsDevice.GetDefault().AllocateReadWriteBuffer<float>(size))
         {
-            GraphicsDevice.GetDefault().For(size, new RandomShader(buffer, size));
+            GraphicsDevice.GetDefault().For(size, new RandomShader(buffer, size,fillValue));
             buffer.CopyTo(matrix);
         }
 

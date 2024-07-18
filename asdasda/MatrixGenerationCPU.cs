@@ -8,17 +8,13 @@ namespace asdasda
 {
     public class MatrixGenerationCPU
     {
-        public static float[] GenerateArrayParallel(int length)
+        public static float[] GenerateArrayParallel(int length, float fillValue)
         {
             float[] array = new float[length];
-            Random rand = new Random();
 
             Parallel.For(0, length, i =>
             {
-                lock (rand) // Ensure thread-safe access to the random generator
-                {
-                    array[i] = (float)(rand.NextDouble() * 10);
-                }
+                array[i] = fillValue;
             });
 
             return array;
